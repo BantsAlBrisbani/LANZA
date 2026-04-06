@@ -1,0 +1,116 @@
+// https://community.bistudio.com/wiki/Description.ext
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Respawn ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+// https://community.bistudio.com/wiki/Arma_3:_Respawn
+respawn = "BASE"; // Respawn system type
+respawnTemplates[] = {"Base", "Counter", "MenuPosition" }; // Sets the system type, Shows respawn timer whendead, Allows players to select where to spawn.
+respawnOnStart = 0; // This means that players will spawn where their character in located at the mission start. Change the 0 to 1 if you want players to select their respawn position upon load in.
+respawnDialog = 0; // Show the scoreboard and respawn countdown timer for a player
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ PDA/Intel Required Lines ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+#include "cfgMRH_SoldierTabIntelPictures.hpp"
+#include "cfgMRH_SoldierTabData.hpp"
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Zeus Debug Permissions ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+enableDebugConsole[] = {"76561198023143977","76561198018476317","76561198841894649","76561198072060212","76561197998655174","76561198280158885","76561198070234844","76561198874941602","76561198043824928"}; // Thomas, Jazz, Six, Trew, Mold, Rauty, Trey, Soggy, Dove
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Mission Settings ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+
+disabledAI = 1; // Disables ai from filling player slots.
+disableChannels[] = {1,2,3,4,5,6}; // 0 = Global, 1 = Side, 2 = Command, 3 = Group, 4 = Vehicle, 5 = Direct, 6 = System. Admin/server/BattlEye can still use Global.
+aiKills = 0; // disable scorelist for AI players
+joinUnassigned = 1; // 0 = players forced into role on join
+saving = 0;
+zeusCompositionScriptLevel = 2; // 2: all scripts are allowed including init scripts
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Corpse and Wreck Management ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+corpseManagerMode = 1;
+corpseLimit = 32;
+corpseRemovalMinTime = 300;
+corpseRemovalMaxTime = 1800;
+
+wreckManagerMode = 0;
+wreckLimit = 12;
+wreckRemovalMinTime = 1200;
+wreckRemovalMaxTime = 3600;
+
+weaponholderManagerMode = 1;
+weaponholderLimit = 50;
+weaponholderRemovalMinTime = 600;
+weaponholderRemovalMaxTime = 3600;
+
+disposalCheckPeriod = 60;
+minPlayerDistance[] = {150, 1000, 150}; // {corpses, wrecks, weaponholders} 
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Extended EventHandlers ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+class Extended_PreInit_EventHandlers {
+    class ASOT_unconCam {
+        init = "call compile preprocessFile 'scripts\unconCam.sqf'"
+    };
+    class perfort_preset {
+        serverInit = "call compile preprocessFile 'scripts\registerObjectLists.sqf'";
+    }
+};
+
+class Extended_PostInit_EventHandlers {
+    class ASOT_DRAG_CARRY {
+        // Removes ACE dragging/carry max carry weight
+        init = "ACE_maxWeightDrag = nil; ACE_maxWeightCarry = nil;"
+    };
+    class BIS_dynamicGroups {
+        serverInit = "['Initialize', [true]] call BIS_fnc_dynamicGroups;";
+        clientInit = "['InitializePlayer', [player, true]] call BIS_fnc_dynamicGroups;";
+    };
+};
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Sound Files ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+// https://community.bistudio.com/wiki/Description.ext#CfgSounds
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Sound Files ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+
+/*
+
+class CfgSounds
+{
+    sounds[] = {};
+    class audioclassname
+    {
+        // Name for mission editor
+        name = "soundname";
+        // Path of the .ogg file. since it's in the same folder just use the filename
+        sound[] = {\audiofilename.ogg, 10, 1, 250};
+        titles[] = {0, ""};
+    };
+	class audioclassname2
+    {
+        // Name for mission editor
+        name = "soundname2";
+        // Path of the .ogg file. since it's in the same folder just use the filename
+        sound[] = {\audiofilename.ogg, 10, 1, 250};
+        titles[] = {0, ""};
+    };
+};
+
+*/
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Music Files ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
+
+/*
+
+class CfgMusic
+{
+	tracks[]={};
+
+	class Distresscall
+	{
+		name = "Distresscall";
+		sound[] = {"\music\Distresscall.ogg", db+10, 1.0};
+	};
+	class Anonymous
+	{
+		name = "Anonymous";
+		sound[] = {"\music\Anonymous.ogg", db+10, 1.0};
+	};
+};
+
+*/
