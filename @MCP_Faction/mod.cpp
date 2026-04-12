@@ -1,0 +1,10 @@
+name = "MCP - LANZA VERDE";
+tooltip = "MCP";
+tooltipOwned = "MCP";
+overview = "Custom OPFOR faction with config-driven randomized rigs, helmets, and facewear.";
+author = "BantsAlBrisbani";
+actionName = "Website";
+action = "";
+hideName = 0;
+hidePicture = 1;
+dlcColor[] = {0.0,0.3,0.6,1};
