@@ -1,0 +1,1 @@
+["kat_CarbonateItem","kat_IFAK","ACE_fieldDressing","ACE_elasticBandage","ACE_packingBandage","ACE_quikclot","ACE_bodyBag","ACE_splint","ACE_tourniquet","ACE_painkillers","kat_crossPanel","kat_chestSeal","ACE_salineIV_500","ACE_salineIV_250","ACE_salineIV"]
